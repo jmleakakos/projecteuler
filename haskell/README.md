@@ -15,3 +15,4 @@ $ ./001
 
 Packages (install with `cabal install primes`)
 * primes
+* hunit
