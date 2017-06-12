@@ -2,8 +2,14 @@
 
 <a href='/euler'>Home</a> | <a href='/euler/ruby'>Ruby</a> | <a href='/euler/haskell'>Haskell</a>
 
-<ul>
+<div class='problem-navigation' id='problem-navigation'>
   <% @files.each do |file| %>
-    <%= render partial: "problem", locals: {file: file}%>
+    <a href='#<%= file.name %>'><%= file.name %></a>
   <% end %>
-</ul>
+</div>
+
+<div>
+  <% @files.each do |file| %>
+    <%= render "problem", file: file %>
+  <% end %>
+</div>
