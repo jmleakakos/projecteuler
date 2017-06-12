@@ -2,9 +2,6 @@
 
 <ul>
   <% @files.each do |file| %>
-    <div class='code-file'>
-      <div class='file-name'><%= file.name %></div>
-      <pre><%= file.text %></pre>
-    </div>
+    <%= render partial: "problem", locals: {file: file}%>
   <% end %>
 </ul>
