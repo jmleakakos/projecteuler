@@ -1,0 +1,8 @@
+.code-file:not(:last-child) {
+  border-bottom: 1px black solid;
+  margin-bottom: 30px;
+}
+
+.file-name {
+  font-style: oblique
+}
