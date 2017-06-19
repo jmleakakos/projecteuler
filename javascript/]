@@ -120,7 +120,7 @@ function problem004() {
       }
     }
   }
-  console.log("Problem 004: " + largest);
+  console.log("Problem 004: " + product);
 }
 
 function isPalindromeNumber(num) {
