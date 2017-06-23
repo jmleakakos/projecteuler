@@ -53,11 +53,11 @@ What is the largest prime factor of the number 600851475143 ?
 
 function problem003() {
   var num = 600851475143;
-  var primes = primesUpTo(Math.floor(Math.sqrt(num)));
+  var ps = primes(Math.floor(Math.sqrt(num)));
   var factor = 1;
-  for (var i = 0; i < primes.length; i++) {
-    if (num % primes[i] === 0 && primes[i] > factor) {
-      factor = primes[i]
+  for (var i = 0; i < ps.length; i++) {
+    if (num % ps[i] === 0 && ps[i] > factor) {
+      factor = ps[i]
     }
   }
   console.log("Problem 003: " + factor);
@@ -83,24 +83,53 @@ function isPrime(num) {
   return true;
 }
 
-function primesUpTo(num) {
-  var wheel = [2]
-  for (var i = 3; i <= num; i += 2) {
-    wheel.push(i);
+function primes(n = 2) {
+  // Iterate through natural numbers
+  // If number is prime, mark its mutiples
+  // Auto mark all even numbers
+  const LIMIT = n;
+  const wheel = [2, 3, 5, 7, 11];
+  var numbersAndMarks = [
+    [1, true],
+    [2, false],
+    [3, false],
+    [4, true],
+    [5, false],
+    [6, true],
+    [7, false],
+    [8, true],
+    [9, true],
+    [10, true],
+    [11, false],
+    ];
+  // setup all numbers
+  // mark all wheel-based intervals
+  for (var i = 12; i <= LIMIT; i++) {
+    if (wheel.some(function(prime) { return i % prime === 0 })) {
+      numbersAndMarks.push([i, true]);
+    } else {
+      numbersAndMarks.push([i, false]);
+    }
   }
-  for (var index = 1; index < wheel.length; index++) {
-    var nextVal = wheel[index];
-    var indicesToRemove = [];
-    for (var i = index + 1; i < wheel.length; i++) {
-      if (wheel[i] % nextVal === 0) {
-        indicesToRemove.push(i)
+  // iterate over odd numbers using the index (index even for odd numbers)
+  for (var i = 2; i < numbersAndMarks.length; i += 2) {
+    var [number, marked] = numbersAndMarks[i];
+    if (!marked) {
+      // iterate over multiples
+      for (var j = number + number; j < numbersAndMarks.length; j += number) {
+        numbersAndMarks[j-1] = [j, true];
       }
     }
-    for (var i = indicesToRemove.length - 1; i >= 0; i--) {
-      wheel.splice(indicesToRemove[i], 1);
-    }
   }
-  return wheel;
+  var primes = [];
+  var markedPrimes = numbersAndMarks.forEach(function (nm) {
+    var [number, marked] = nm;
+    if(!marked) {
+      primes.push(number);
+    }
+  });
+
+  return primes;
 }
 
 /*
@@ -133,24 +162,23 @@ function isPalindromeNumber(num) {
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 */
 function problem005() {
-  var primes = primesUpTo(20);
+  var ps = primes(20);
   var primeFactors = {};
-  primes.map(function(p) {
+  ps.map(function(p) {
     primeFactors[p] = 0;
   });
   const START = 2;
   const END = 20;
   for (var num = START; num <= END; num++) {
-    for (var primesIndex = 0; primesIndex < primes.length; primesIndex++) {
-      var prime = primes[primesIndex];
+    for (var psIndex = 0; psIndex < ps.length; psIndex++) {
+      var prime = ps[psIndex];
       var count = factorCount(num, prime);
       if(count > 0 && primeFactors[prime] < count) {
         primeFactors[prime] = count;
       }
     }
   }
-  var lcm = primes.reduce(function(acc, prime) {
-    console.log(prime, primeFactors[prime]);
+  var lcm = ps.reduce(function(acc, prime) {
     return acc * prime ** primeFactors[prime]
   }, 1);
   console.log("Problem 005: " + lcm);
@@ -199,7 +227,7 @@ By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
 What is the 10 001st prime number?
 */
 function problem007() {
-  var prime = primesUpTo(200000)[10000];
+  var prime = primes(200000)[10000];
   console.log("Problem 007: " + prime);
 }
 
@@ -258,6 +286,6 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 */
 function problem010() {
-  var sum = primesUpTo(2000000).reduce(function(acc, n) { return acc + n });
+  var sum = primes(2000000).reduce(function(acc, n) { return acc + n });
   console.log("Problem 010: " + sum);
 }
