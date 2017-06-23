@@ -193,3 +193,12 @@ function problem006() {
   }, 0) ** 2;
   console.log("Problem 006: " + (squareOfSums - sumOfSquares));
 }
+/*
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+What is the 10 001st prime number?
+*/
+function problem007() {
+  var prime = primesUpTo(200000)[10000];
+  console.log("Problem 007: " + prime);
+}
