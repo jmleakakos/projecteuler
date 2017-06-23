@@ -7,8 +7,8 @@ function problem001() {
   var end = 1000;
   var sum = 0;
 
-  for(var i = start; i < 1000; i++) {
-    if(i % 3 == 0 || i % 5 ==0) {
+  for (var i = start; i < 1000; i++) {
+    if (i % 3 == 0 || i % 5 == 0) {
       sum += i;
     }
   }
@@ -25,7 +25,7 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 function problem002() {
 
-  var sum = fibonaccis(4000000).reduce(function(a,v) { return v % 2 == 0 ? a + v : a}, 0)
+  var sum = fibonaccis(4000000).reduce(function (a, v) { return v % 2 == 0 ? a + v : a }, 0)
   console.log("Problem 002: " + sum);
 }
 
@@ -36,7 +36,7 @@ function fibonaccis(stopWhen = 2) {
   var nextFib = fib1 + fib2;
   var fibs = [fib1, fib2];
 
-  while(nextFib < stopWhen) {
+  while (nextFib < stopWhen) {
     fibs.push(nextFib);
     var nextFibTemp = nextFib;
     nextFib = currentFib + nextFibTemp;
@@ -55,8 +55,8 @@ function problem003() {
   var num = 600851475143;
   var primes = primesUpTo(Math.floor(Math.sqrt(num)));
   var factor = 1;
-  for(var i = 0; i < primes.length; i++) {
-    if(num % primes[i] === 0 && primes[i] > factor) {
+  for (var i = 0; i < primes.length; i++) {
+    if (num % primes[i] === 0 && primes[i] > factor) {
       factor = primes[i]
     }
   }
@@ -64,18 +64,18 @@ function problem003() {
 }
 
 function isPrime(num) {
-  if(num === 1) {
+  if (num === 1) {
     return false;
-  } else if(num === 2) {
+  } else if (num === 2) {
     return true;
-  } else if(num % 2 === 0) {
+  } else if (num % 2 === 0) {
     return false;
   } else {
     var start = 3;
     var limit = Math.floor(Math.sqrt(num));
     var end = limit < num ? num : limit;
-    for(var i = start; i < end; i+=2) {
-      if(num % i ==0) {
+    for (var i = start; i < end; i += 2) {
+      if (num % i == 0) {
         return false;
       }
     }
@@ -85,19 +85,19 @@ function isPrime(num) {
 
 function primesUpTo(num) {
   var wheel = [2]
-  for(var i = 3; i <= num; i+=2) {
+  for (var i = 3; i <= num; i += 2) {
     wheel.push(i);
   }
-  for(var index = 1; index < wheel.length; index++) {
+  for (var index = 1; index < wheel.length; index++) {
     var nextVal = wheel[index];
     var indicesToRemove = [];
-    for(var i = index+1; i < wheel.length; i++) {
-      if(wheel[i] % nextVal === 0) {
+    for (var i = index + 1; i < wheel.length; i++) {
+      if (wheel[i] % nextVal === 0) {
         indicesToRemove.push(i)
       }
     }
-    for(var i = indicesToRemove.length-1; i >= 0; i--) {
-      wheel.splice(indicesToRemove[i],1);
+    for (var i = indicesToRemove.length - 1; i >= 0; i--) {
+      wheel.splice(indicesToRemove[i], 1);
     }
   }
   return wheel;
@@ -112,10 +112,10 @@ function problem004() {
   var start = 100;
   var end = 999;
   var largest = 0;
-  for(var i = start; i <= end; i++) {
-    for(var j = i+1; j <= end; j++) {
+  for (var i = start; i <= end; i++) {
+    for (var j = i + 1; j <= end; j++) {
       var product = i * j;
-      if(isPalindromeNumber(product) && product > largest) {
+      if (isPalindromeNumber(product) && product > largest) {
         largest = product;
       }
     }
@@ -125,4 +125,46 @@ function problem004() {
 
 function isPalindromeNumber(num) {
   return num === parseInt(num.toString().split("").reverse().join(""));
+}
+
+/*
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+*/
+function problem005() {
+  var primes = primesUpTo(20);
+  var primeFactors = {};
+  primes.map(function(p) {
+    primeFactors[p] = 0;
+  });
+  const START = 2;
+  const END = 20;
+  for (var num = START; num <= END; num++) {
+    for (var primesIndex = 0; primesIndex < primes.length; primesIndex++) {
+      var prime = primes[primesIndex];
+      var count = factorCount(num, prime);
+      if(count > 0 && primeFactors[prime] < count) {
+        primeFactors[prime] = count;
+      }
+    }
+  }
+  var lcm = primes.reduce(function(acc, prime) {
+    console.log(prime, primeFactors[prime]);
+    return acc * prime ** primeFactors[prime]
+  }, 1);
+  console.log("Problem 005: " + lcm);
+}
+
+function factorCount(number, factor) {
+  var count = 0;
+  if(number % factor === 0) {
+    count++;
+    var result = number / factor;
+    while(result % factor === 0) {
+      count++;
+      result = result / factor;
+    }
+  }
+  return count;
 }
