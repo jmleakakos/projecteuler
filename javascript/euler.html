@@ -1,5 +1,52 @@
 <html>
+  <head>
+    <link href='euler.css' rel='stylesheet'>
+  </head>
   <body>
+    <div id='problems'>
+      <div id='problem001'>
+       Problem 001:  
+      </div>
+      <div id='problem002'>
+       Problem 002:  
+      </div>
+      <div id='problem003'>
+       Problem 003:  
+      </div>
+      <div id='problem004'>
+       Problem 004:  
+      </div>
+      <div id='problem005'>
+       Problem 005:  
+      </div>
+      <div id='problem006'>
+       Problem 006:  
+      </div>
+      <div id='problem007'>
+       Problem 007:  
+      </div>
+      <div id='problem008'>
+       Problem 008:  
+      </div>
+      <div id='problem009'>
+       Problem 009:  
+      </div>
+      <div id='problem010'>
+       Problem 010:  
+      </div>
+    </div>
+    <button id='display'>Show results</button>
     <script src='euler.js'></script>
+    <script>
+      var displayButton = document.getElementById('display');
+      displayButton.onclick = function() {
+        var problems = document.getElementById('problems');
+        for(var i = 0; i < problems.children.length; i++) {
+          var problemNode = problems.children[i];
+          var result = window[problemNode.id]();
+          problemNode.innerText += (" " + result.toString());
+        }
+      };
+    </script>
   </body>
 </html>
