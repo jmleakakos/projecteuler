@@ -89,23 +89,13 @@ function primes(n = 2) {
   // Auto mark all even numbers
   const LIMIT = n;
   const wheel = [2, 3, 5, 7, 11];
-  var numbersAndMarks = [
-    [1, true],
-    [2, false],
-    [3, false],
-    [4, true],
-    [5, false],
-    [6, true],
-    [7, false],
-    [8, true],
-    [9, true],
-    [10, true],
-    [11, false],
-    ];
+  var numbersAndMarks = [[1, true]];
   // setup all numbers
   // mark all wheel-based intervals
-  for (var i = 12; i <= LIMIT; i++) {
-    if (wheel.some(function(prime) { return i % prime === 0 })) {
+  for (var i = 2; i <= LIMIT; i++) {
+    if(wheel.includes(i)) {
+      numbersAndMarks.push([i, false])
+    } else if (wheel.some(function (prime) { return i % prime === 0 })) {
       numbersAndMarks.push([i, true]);
     } else {
       numbersAndMarks.push([i, false]);
