@@ -251,3 +251,13 @@ function problem009() {
   }
   console.log("Problem 009: " + result);
 }
+
+/*
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+*/
+function problem010() {
+  var sum = primesUpTo(2000000).reduce(function(acc, n) { return acc + n });
+  console.log("Problem 010: " + sum);
+}
