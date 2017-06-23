@@ -12,7 +12,7 @@ function problem001() {
       sum += i;
     }
   }
-  console.log("Problem 001: " + sum);
+  return sum;
 }
 
 /*
@@ -24,9 +24,7 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 */
 
 function problem002() {
-
-  var sum = fibonaccis(4000000).reduce(function (a, v) { return v % 2 == 0 ? a + v : a }, 0)
-  console.log("Problem 002: " + sum);
+  return fibonaccis(4000000).reduce(function (a, v) { return v % 2 == 0 ? a + v : a }, 0)
 }
 
 function fibonaccis(stopWhen = 2) {
@@ -60,7 +58,7 @@ function problem003() {
       factor = ps[i]
     }
   }
-  console.log("Problem 003: " + factor);
+  return factor;
 }
 
 function isPrime(num) {
@@ -139,7 +137,7 @@ function problem004() {
       }
     }
   }
-  console.log("Problem 004: " + largest);
+  return largest;
 }
 
 function isPalindromeNumber(num) {
@@ -171,7 +169,7 @@ function problem005() {
   var lcm = ps.reduce(function (acc, prime) {
     return acc * prime ** primeFactors[prime]
   }, 1);
-  console.log("Problem 005: " + lcm);
+  return lcm;
 }
 
 function factorCount(number, factor) {
@@ -209,7 +207,7 @@ function problem006() {
   var squareOfSums = l.reduce(function (acc, n) {
     return acc + n;
   }, 0) ** 2;
-  console.log("Problem 006: " + (squareOfSums - sumOfSquares));
+  return (squareOfSums - sumOfSquares);
 }
 /*
 By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
@@ -218,7 +216,7 @@ What is the 10 001st prime number?
 */
 function problem007() {
   var prime = primes(200000)[10000];
-  console.log("Problem 007: " + prime);
+  return prime;
 }
 
 /*
@@ -238,7 +236,7 @@ function problem008() {
       greatestProduct = product;
     }
   }
-  console.log("Problem 008: " + greatestProduct);
+  return greatestProduct;
 }
 
 /*
@@ -267,7 +265,7 @@ function problem009() {
       }
     }
   }
-  console.log("Problem 009: " + result);
+  return result;
 }
 
 /*
@@ -276,6 +274,5 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 */
 function problem010() {
-  var sum = primes(2000000).reduce(function (acc, n) { return acc + n });
-  console.log("Problem 010: " + sum);
+  return primes(2000000).reduce(function (acc, n) { return acc + n });
 }
