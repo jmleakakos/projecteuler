@@ -22,8 +22,7 @@ def primes_up_to(n):
     return primes
 
 def prime_factors(n):
-    limit = int(n ** (.5)) + 1
-    primes = primes_up_to(limit)
+    primes = primes_up_to(n)
     factors = list(filter(lambda x: n % x == 0, primes))
     return factors
 
