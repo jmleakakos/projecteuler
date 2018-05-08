@@ -68,6 +68,7 @@ def pf(number, prime_index, counts):
     return pf(number, prime_index, counts)
 
 def prime_factorization_of(n):
+    # Apparently there is no default tail call optimizaion
     #return pf(n, 0, {})
     return pf_no_recursion(n, 0, {})
 
