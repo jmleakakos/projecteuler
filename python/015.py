@@ -22,3 +22,22 @@ subset = math.factorial(downs) * math.factorial(rights)
 value = total / subset
 print(value)
 print(value == 137846528820)
+
+
+size = 2
+size = 20
+
+grid = [[0,0,0],[0,0,0],[0,0,0]]
+grid = [[0]*(size+1) for i in range(size+1)]
+
+for i in range(size+1):
+    grid[i][size] = 1
+    grid[size][i] = 1
+
+for i in reversed(range(size)):
+    for j in reversed(range(size)):
+        grid[i][j] = grid[i+1][j] + grid[i][j+1]
+
+value = grid[0][0]
+print(value)
+print(value == 137846528820)
